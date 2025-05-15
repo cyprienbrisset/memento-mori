@@ -200,7 +200,9 @@ const LifeExpectancyEstimator = ({ onEstimate }: LifeExpectancyEstimatorProps) =
 
     // Calcul de l'espérance de vie finale
     const scorePercentage = (score / maxScore) * 100;
-    const adjustedLifeExpectancy = base + (scorePercentage / 100) * 15;
+    // Impact de -10 ans pour score 0 à +8 ans pour score 100
+    const impact = (scorePercentage / 100) * 18 - 10;
+    const adjustedLifeExpectancy = base + impact;
 
     onEstimate(Math.round(adjustedLifeExpectancy));
     setIsOpen(false);
