@@ -10,7 +10,7 @@ interface LifeExpectancySliderProps {
   label?: string
 }
 
-export function LifeExpectancySlider({ value, onChange, label = "Espérance de vie" }: LifeExpectancySliderProps) {
+export const LifeExpectancySlider = ({ value, onChange, label = "Espérance de vie" }: LifeExpectancySliderProps) => {
   const [localValue, setLocalValue] = useState(value)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
