@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 60 30% 98%;
+  --foreground: 0 0% 10%;
+  --border: 0 0% 82%;
+  --week-lived: 0 0% 82%;
+  --week-future: 0 0% 96%;
+}
+
+body {
+  background-color: #f8f8f7;
+  color: #1a1a1a;
+  font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv03" on;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer components {
+  .week-square {
+    @apply relative aspect-square;
+  }
+
+  .week-lived {
+    @apply bg-[#d1d1d1];
+  }
+
+  .week-future {
+    @apply bg-[#f0f0f0] border border-[#e5e5e5];
+  }
+
+  .week-shared-lived {
+    @apply bg-[#d1d1d1];
+  }
+
+  .week-shared-future {
+    @apply bg-[#a8d8ea];
+  }
+}
