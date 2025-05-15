@@ -1,209 +1,200 @@
-# Memento Mori
+# Memento Mori - Visualiseur de Temps de Vie
 
-> "Memento Mori" - Souvenez-vous que vous êtes mortel
+Une application web interactive qui vous permet de visualiser votre temps de vie restant sous forme de calendrier, inspirée par le concept philosophique de "Memento Mori" (Souviens-toi que tu vas mourir).
 
-Une application web philosophique et interactive qui vous permet de visualiser le temps qui vous reste à vivre. Inspirée par le concept stoïcien de "Memento Mori", cette application vous aide à prendre conscience de la précarité de la vie et à vivre chaque jour avec plus de conscience.
+## Fonctionnalités
 
-## 🌟 À Propos
+### Visualisation du Temps
+- Calendrier de vie interactif montrant les semaines passées et restantes
+- Compteur de temps restant en temps réel
+- Affichage des années écoulées et restantes
+- Visualisation claire des différentes périodes de la vie
 
-Memento Mori est une application moderne qui transforme un concept philosophique profond en une expérience visuelle interactive. Elle vous permet de :
+### Calculateur d'Espérance de Vie
+Un calculateur sophistiqué qui estime votre espérance de vie en fonction de plusieurs facteurs, utilisant un système de score pondéré sur 100 points. L'espérance de vie finale est calculée selon la formule :
+```
+Espérance de vie finale = Base ajustée + (Score global / 100) × 15 ans
+```
+où la base est de 86 ans pour les femmes et 82 ans pour les hommes.
 
-- Visualiser votre vie sous forme d'un calendrier interactif
-- Calculer le temps restant en fonction de votre espérance de vie
-- Personnaliser votre espérance de vie pour une visualisation plus précise
-- Réfléchir sur le temps qui passe et l'importance de chaque moment
+#### Facteurs pris en compte et leur poids :
+1. **Informations de base (20 points)**
+   - Niveau d'éducation (10 points)
+     * Primaire : 2 points
+     * Secondaire : 5 points
+     * Supérieur : 10 points
+   - Niveau de revenu (10 points)
+     * Faible : 2 points
+     * Moyen : 5 points
+     * Élevé : 10 points
 
-## 🎯 Objectifs
+2. **Habitudes de consommation (35 points)**
+   - Tabac (15 points)
+     * Non-fumeur : 15 points
+     * Occasionnel : 5 points
+     * Fumeur régulier : 0 point
+   - Alcool (10 points)
+     * Aucune consommation : 10 points
+     * Occasionnelle : 8 points
+     * Modérée : 5 points
+     * Forte : 0 point
+   - Drogues (10 points)
+     * Non-consommateur : 10 points
+     * Occasionnel : 5 points
+     * Consommateur régulier : 0 point
 
-- Sensibiliser à la précarité de la vie
-- Encourager une vie plus consciente et intentionnelle
-- Fournir une visualisation claire du temps restant
-- Offrir une expérience utilisateur élégante et réfléchie
+3. **Mode de vie (25 points)**
+   - Activité physique (10 points)
+     * 5+ fois/semaine : 10 points
+     * 3-4 fois/semaine : 7 points
+     * 1-2 fois/semaine : 3 points
+     * Aucune : 0 point
+   - Sommeil (10 points)
+     * Durée (5 points)
+       - 7-8h : 5 points
+       - Plus de 8h : 3 points
+       - 5-6h : 2 points
+       - Moins de 5h : 0 point
+     * Qualité (5 points)
+       - Bonne : 5 points
+       - Correcte : 3 points
+       - Mauvaise : 0 point
+   - Alimentation (10 points)
+     * Saine : 10 points
+     * Équilibrée : 7 points
+     * Moyenne : 4 points
+     * Déséquilibrée : 0 point
 
-## 🚀 Technologies
+4. **Santé (20 points)**
+   - IMC (5 points)
+     * Normal (18.5-25) : 5 points
+     * Surpoids (25-30) : 3 points
+     * Sous-poids (<18.5) : 1 point
+     * Obésité (>30) : 0 point
+   - Maladies chroniques (5 points)
+     * Aucune : 5 points
+     * 1 maladie : 2 points
+     * Plusieurs maladies : 0 point
+   - Stress (5 points)
+     * Rare : 5 points
+     * Occasionnel : 3 points
+     * Souvent : 1 point
+     * Constant : 0 point
+   - Suivi médical (5 points)
+     * Suivi régulier : 5 points
+     * Pas de suivi : 0 point
 
-- **Framework**: Next.js 15.2.4
-- **UI Library**: React 19
-- **Styling**: TailwindCSS
-- **Type Safety**: TypeScript
-- **Package Manager**: pnpm
-- **UI Components**: 
-  - Radix UI (composants accessibles)
-  - Framer Motion (animations)
-  - Lucide React (icônes)
-  - Embla Carousel (carrousel)
-  - Recharts (graphiques)
-  - Sonner (notifications)
+5. **Environnement (15 points)**
+   - Type d'habitat (5 points)
+     * Campagne : 5 points
+     * Petite ville : 3 points
+     * Grande ville : 2 points
+     * Zone polluée : 0 point
+   - Qualité de l'air (5 points)
+     * Bonne : 5 points
+     * Moyenne : 3 points
+     * Mauvaise : 0 point
+   - Support social (5 points)
+     * Fort : 5 points
+     * Modéré : 3 points
+     * Faible : 0 point
 
-## 📦 Installation
+6. **Facteurs supplémentaires (10 points)**
+   - Consommation d'eau (5 points)
+     * Excellente (>2L) : 5 points
+     * Suffisante (1-2L) : 3 points
+     * Insuffisante (<1L) : 0 point
+   - Pratique de relaxation (5 points)
+     * Quotidienne : 5 points
+     * Occasionnelle : 3 points
+     * Aucune : 0 point
 
-1. Clonez le repository :
+### Interface Utilisateur
+- Design moderne et épuré
+- Thème sombre/clair
+- Interface responsive
+- Animations fluides
+- Formulaires interactifs
+
+## Technologies Utilisées
+
+- **Frontend**
+  - Next.js 14
+  - React 18
+  - TypeScript
+  - Tailwind CSS
+  - Shadcn/ui
+  - date-fns
+  - React Testing Library
+  - Jest
+
+- **Tests**
+  - Tests unitaires
+  - Tests d'intégration
+  - Couverture de tests
+
+## Installation
+
+1. Cloner le repository :
 ```bash
 git clone [URL_DU_REPO]
 cd memento-mori
 ```
 
-2. Installez les dépendances :
+2. Installer les dépendances :
 ```bash
-pnpm install
+npm install
 ```
 
-3. Lancez le serveur de développement :
+3. Lancer l'application en mode développement :
 ```bash
-pnpm dev
+npm run dev
 ```
 
-## 🛠️ Scripts Disponibles
+4. Lancer les tests :
+```bash
+npm test
+```
 
-- `pnpm dev` : Lance le serveur de développement
-- `pnpm build` : Génère la version de production
-- `pnpm start` : Lance la version de production
-- `pnpm lint` : Vérifie le code avec ESLint
+5. Générer le rapport de couverture de tests :
+```bash
+npm run test:coverage
+```
 
-## 🏗️ Structure du Projet
+## Structure du Projet
 
 ```
 memento-mori/
-├── app/                 # Pages et layouts Next.js
-├── components/          # Composants React réutilisables
-├── hooks/              # Custom React hooks
-├── lib/                # Utilitaires et configurations
-├── public/             # Assets statiques
-├── styles/             # Styles globaux
-└── types/              # Types TypeScript
+├── app/                    # Pages de l'application
+├── components/            # Composants React
+│   ├── ui/               # Composants UI réutilisables
+│   └── ...               # Autres composants
+├── lib/                  # Utilitaires et configurations
+├── public/              # Assets statiques
+└── tests/               # Tests
 ```
 
-## 🎨 Fonctionnalités
+## Contribution
 
-### 📅 Calendrier de Vie
-- Visualisation interactive de votre vie sous forme de calendrier
-- Représentation claire des semaines, mois et années
-- Indication visuelle du temps écoulé et du temps restant
+Les contributions sont les bienvenues ! N'hésitez pas à :
+1. Fork le projet
+2. Créer une branche pour votre fonctionnalité
+3. Commiter vos changements
+4. Pousser vers la branche
+5. Ouvrir une Pull Request
 
-### ⏳ Compteur de Temps Restant
-- Calcul précis du temps restant en fonction de votre date de naissance
-- Affichage en temps réel des années, mois, semaines et jours restants
-- Mise à jour dynamique des compteurs
+## Licence
 
-### ⚙️ Paramètres Personnalisables
-- Formulaire de saisie de date de naissance intuitif
-- Curseur d'ajustement de l'espérance de vie
-- Interface de paramètres accessible à tout moment
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
-### 🎭 Interface Utilisateur
-- Design minimaliste et élégant
-- Animations fluides avec Framer Motion
-- Thème sombre/clair avec next-themes
-- Composants UI accessibles avec Radix UI
-- Notifications élégantes avec Sonner
+## Auteur
 
-### 📱 Responsive Design
-- Interface adaptative pour tous les appareils
-- Expérience utilisateur optimisée sur mobile et desktop
-- Composants redimensionnables et flexibles
+[Votre Nom]
 
-## 🚀 Déploiement
+## Remerciements
 
-Le projet est configuré pour générer une version statique exportable. Pour construire :
-
-```bash
-pnpm build
-```
-
-Le build sera généré dans le dossier `out/` et peut être déployé sur n'importe quel hébergeur statique.
-
-## 🔧 Configuration
-
-Le projet utilise plusieurs configurations :
-
-- `next.config.mjs` : Configuration Next.js
-- `tailwind.config.js` : Configuration TailwindCSS
-- `tsconfig.json` : Configuration TypeScript
-- `postcss.config.mjs` : Configuration PostCSS
-
-## 📝 Licence
-
-© 2024 Memento Mori. Tous droits réservés.
-
-Ce projet est propriétaire et est protégé par les lois sur la propriété intellectuelle. Toute utilisation, modification, distribution ou reproduction de ce code source est strictement interdite sans autorisation écrite préalable.
-
-### Conditions d'utilisation
-
-- ❌ Non redistribuable
-- ❌ Non modifiable
-- ❌ Non commercialisable
-- ✅ Utilisation personnelle uniquement
-- ✅ Consultation du code source autorisée
-
-Pour toute demande d'utilisation ou de licence, veuillez contacter le propriétaire du projet.
-
-## 👥 Contribution
-
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
-
-## 🔐 Variables d'Environnement
-
-Créez un fichier `.env.local` à la racine du projet pour les variables d'environnement :
-
-```env
-# Exemple de variables d'environnement
-NEXT_PUBLIC_API_URL=votre_url_api
-```
-
-## 🧪 Tests
-
-Ce projet accorde une grande importance à la qualité et à la robustesse du code grâce à une stratégie de tests complète.
-
-### Outils utilisés
-
-- **Jest** : Framework de test principal
-- **@testing-library/react** : Tests orientés utilisateur pour les composants React
-- **@testing-library/jest-dom** : Assertions enrichies pour le DOM
-- **Couverture** : Générée automatiquement à chaque exécution
-
-### Structure des tests
-
-Les tests sont organisés par type et par fonctionnalité :
-
-```
-__tests__/
-  components/
-    birth-date-form.test.tsx
-    life-calendar.test.tsx
-    life-expectancy-slider.test.tsx
-    remaining-time-counter.test.tsx
-    theme-provider.test.tsx
-  integration/
-    app.test.tsx
-  lib/
-    time-utils.test.ts
-    utils.test.ts
-```
-
-- **Unitaires** : Fonctions utilitaires, logique métier
-- **Composants** : Rendu, interactions, accessibilité
-- **Intégration** : Parcours utilisateur, scénarios réels
-
-### Lancer les tests
-
-```bash
-pnpm test           # Lancer tous les tests
-pnpm test:watch     # Mode interactif (TDD)
-pnpm test:coverage  # Générer le rapport de couverture
-```
-
-### Rapport de couverture (exemple)
-
-| Fichier                        | Couverture |
-|--------------------------------|:----------:|
-| `birth-date-form.tsx`          |   100%     |
-| `life-calendar.tsx`            |   100%     |
-| `life-expectancy-slider.tsx`   |   100%     |
-| `remaining-time-counter.tsx`   |   100%     |
-| `theme-provider.tsx`           |   100%     |
-| `time-utils.ts`                |   100%     |
-| `utils.ts`                     |   100%     |
-
-> **Remarque :** Les composants UI génériques (dossier `components/ui/`) ne sont pas testés ici car ils proviennent d'une bibliothèque externe.
+- Inspiration : [Tim Urban's Life Calendar](https://waitbutwhy.com/2014/05/life-weeks.html)
+- Design : [Shadcn/ui](https://ui.shadcn.com/)
+- Icônes : [Lucide Icons](https://lucide.dev/)
 
 ---

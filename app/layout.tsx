@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Memento Mori | Visualisez votre temps",
   description: "Une application minimaliste pour visualiser le temps qu'il vous reste à vivre",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -20,8 +20,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
-      <body className={`${inter.variable} font-sans`}>{children}</body>
+    <html lang="fr" className={inter.variable}>
+      <body className="min-h-screen bg-background font-sans antialiased">
+        <main className="relative flex min-h-screen flex-col">
+          {children}
+        </main>
+      </body>
     </html>
   )
 }

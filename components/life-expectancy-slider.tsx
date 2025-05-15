@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+import { LifeExpectancyEstimator } from "./LifeExpectancyEstimator"
 
 interface LifeExpectancySliderProps {
   value: number
@@ -21,9 +21,15 @@ export function LifeExpectancySlider({ value, onChange, label = "Espérance de v
 
   return (
     <div>
-      <label htmlFor="life-expectancy" className="block text-sm font-medium mb-2">
-        {label}: {localValue} ans
-      </label>
+      <div className="flex items-center justify-between mb-2">
+        <label htmlFor="life-expectancy" className="block text-sm font-medium">
+          {label}: {localValue} ans
+        </label>
+        <LifeExpectancyEstimator onEstimate={(years) => {
+          setLocalValue(years)
+          onChange(years)
+        }} />
+      </div>
       <input
         type="range"
         id="life-expectancy"

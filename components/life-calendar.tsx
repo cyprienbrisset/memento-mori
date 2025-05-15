@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { calculateLivedWeeks, calculateSharedLifeWeeks } from "@/lib/time-utils"
 import Image from "next/image"
 import { Settings } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface LifeCalendarProps {
   birthDate: Date
@@ -93,21 +94,26 @@ export function LifeCalendar({
                 Array.from({ length: numColumns }, (_, yearIndex) => {
                   const weekNumber = yearIndex * 52 + weekIndex
                   const isLived = weekNumber < livedWeeks
+                  const weekDate = new Date(birthDate)
+                  weekDate.setDate(weekDate.getDate() + (weekNumber * 7))
 
-                  // Déterminer la classe en fonction de la période commune
-                  let className = "week-square "
-                  if (secondBirthDate && sharedLife) {
-                    const weekDate = new Date(birthDate)
-                    weekDate.setDate(weekDate.getDate() + (weekNumber * 7))
-                    
-                    if (weekDate >= sharedLife.start && weekDate <= sharedLife.end) {
-                      className += weekDate <= new Date() ? "week-shared-lived" : "week-shared-future"
-                    } else {
-                      className += isLived ? "week-lived" : "week-future"
+                  const isSharedLived = secondBirthDate && sharedLife && weekDate >= sharedLife.start && weekDate <= sharedLife.end && isLived;
+                  const isSharedFuture = secondBirthDate && sharedLife && weekDate >= sharedLife.start && weekDate <= sharedLife.end && !isLived;
+                  const className = cn(
+                    'week-square w-2 h-2 rounded-sm',
+                    {
+                      'week-shared-lived': isSharedLived,
+                      'week-shared-future': isSharedFuture,
+                      'week-lived': !secondBirthDate && isLived,
+                      'week-future': !secondBirthDate && !isLived,
+                      'bg-gray-200': !secondBirthDate && !sharedLife && !isLived,
+                      'bg-gray-400': !secondBirthDate && !sharedLife && isLived,
+                      'bg-blue-200': secondBirthDate && !sharedLife && !isLived,
+                      'bg-blue-400': secondBirthDate && !sharedLife && isLived,
+                      'bg-green-200': secondBirthDate && sharedLife && !isLived,
+                      'bg-green-400': secondBirthDate && sharedLife && isLived
                     }
-                  } else {
-                    className += isLived ? "week-lived" : "week-future"
-                  }
+                  )
 
                   return (
                     <motion.div
