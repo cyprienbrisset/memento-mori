@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { LifeExpectancyEstimator } from "./LifeExpectancyEstimator"
+import { LifeExpectancyEstimator } from './LifeExpectancyEstimator'
 
 interface LifeExpectancySliderProps {
   value: number
