@@ -20,22 +20,22 @@ body {
 
 @layer components {
   .week-square {
-    @apply relative aspect-square;
+    @apply w-[40px] h-[40px] relative rounded-md shadow-sm transition-all duration-200 hover:scale-110 hover:z-10;
   }
 
   .week-lived {
-    @apply bg-[#d1d1d1];
+    @apply bg-[#d1d1d1] hover:bg-[#b8b8b8];
   }
 
   .week-future {
-    @apply bg-[#f0f0f0] border border-[#e5e5e5];
+    @apply bg-[#f0f0f0] border border-[#e5e5e5] hover:bg-[#e0e0e0];
   }
 
   .week-shared-lived {
-    @apply bg-[#d1d1d1];
+    @apply bg-[#d1d1d1] hover:bg-[#b8b8b8];
   }
 
   .week-shared-future {
-    @apply bg-[#a8d8ea];
+    @apply bg-[#a8d8ea] hover:bg-[#8bc8e0];
   }
 }

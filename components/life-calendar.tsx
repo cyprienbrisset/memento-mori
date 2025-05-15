@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { calculateLivedWeeks, calculateSharedLifeWeeks } from "@/lib/time-utils"
 import Image from "next/image"
@@ -24,6 +24,24 @@ export function LifeCalendar({
   viewMode = 'calendar',
   onOpenSettings
 }: LifeCalendarProps) {
+  const [isMobile, setIsMobile] = useState(false)
+  const [currentViewMode, setCurrentViewMode] = useState(viewMode)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    setCurrentViewMode(isMobile ? 'timeline' : viewMode)
+  }, [isMobile, viewMode])
+
   const totalWeeks = lifeExpectancy * 52
   const livedWeeks = useMemo(() => calculateLivedWeeks(birthDate), [birthDate])
 
@@ -65,29 +83,29 @@ export function LifeCalendar({
       </p>
 
       {/* Conteneur principal du calendrier */}
-      <div className="w-full max-w-[2000px] mx-auto border border-[#e5e5e5] rounded-lg p-6 bg-white">
-        {viewMode === 'calendar' ? (
+      <div className="w-full max-w-[2000px] mx-auto border border-[#e5e5e5] rounded-lg p-4 sm:p-6 bg-white overflow-x-auto">
+        {currentViewMode === 'calendar' ? (
           <>
             {/* En-tête des années */}
             <div className="grid mb-4" style={{ 
-              gridTemplateColumns: `repeat(${numColumns}, 20px)`,
-              gap: "2px"
+              gridTemplateColumns: `repeat(${numColumns}, 40px)`,
+              gap: "8px"
             }}>
               {Array.from({ length: numColumns }, (_, yearIndex) => (
                 <div key={yearIndex} className="text-center text-sm font-medium text-[#1a1a1a]/60">
-                  {yearIndex}
+                  {yearIndex % 5 === 0 ? yearIndex : ''}
                 </div>
               ))}
             </div>
 
             {/* Grille du calendrier */}
             <div
-              className="grid w-fit"
+              className="grid w-fit mx-auto"
               style={{
                 display: "grid",
-                gridTemplateColumns: `repeat(${numColumns}, 20px)`,
-                gridTemplateRows: `repeat(${numRows}, 20px)`,
-                gap: "2px",
+                gridTemplateColumns: `repeat(${numColumns}, 40px)`,
+                gridTemplateRows: `repeat(${numRows}, 40px)`,
+                gap: "8px",
               }}
             >
               {Array.from({ length: numRows }, (_, weekIndex) => (
@@ -100,18 +118,12 @@ export function LifeCalendar({
                   const isSharedLived = secondBirthDate && sharedLife && weekDate >= sharedLife.start && weekDate <= sharedLife.end && isLived;
                   const isSharedFuture = secondBirthDate && sharedLife && weekDate >= sharedLife.start && weekDate <= sharedLife.end && !isLived;
                   const className = cn(
-                    'week-square w-2 h-2 rounded-sm',
+                    'week-square',
                     {
                       'week-shared-lived': isSharedLived,
                       'week-shared-future': isSharedFuture,
                       'week-lived': !secondBirthDate && isLived,
                       'week-future': !secondBirthDate && !isLived,
-                      'bg-gray-200': !secondBirthDate && !sharedLife && !isLived,
-                      'bg-gray-400': !secondBirthDate && !sharedLife && isLived,
-                      'bg-blue-200': secondBirthDate && !sharedLife && !isLived,
-                      'bg-blue-400': secondBirthDate && !sharedLife && isLived,
-                      'bg-green-200': secondBirthDate && sharedLife && !isLived,
-                      'bg-green-400': secondBirthDate && sharedLife && isLived
                     }
                   )
 
@@ -251,7 +263,7 @@ export function LifeCalendar({
 
       {/* Légende */}
       <div className="flex justify-center items-center gap-4 mt-4 text-xs flex-wrap text-[#1a1a1a]/70">
-        {viewMode === 'calendar' ? (
+        {currentViewMode === 'calendar' ? (
           secondBirthDate ? (
             <>
               <div className="flex items-center gap-1">
